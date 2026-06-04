@@ -19,14 +19,7 @@ const VAR_STEPS = [
 // Header
 // ─────────────────────────────────────────
 function VarHeader({ idx, totalSteps, step }) {
-  var navLinks = [
-    { id: "home",     label: "Home",     href: "index.html" },
-    { id: "strategy", label: "Strategy", href: "Walkthrough.html" },
-    { id: "variants", label: "Variants", href: "Variants.html" },
-    { id: "demo",     label: "Demo",     href: "Demo.html" },
-  ];
   var isSlide = step.kind !== "cover";
-  var slideLabel = isSlide ? step.title : "Cover";
 
   return (
     <header className="no-print" style={{
@@ -37,30 +30,13 @@ function VarHeader({ idx, totalSteps, step }) {
       borderBottom: "1px solid var(--border)",
     }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "14px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-        <a href="index.html" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <DHLogo size={28} />
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
             <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>Product Variants Strategy</div>
             <div className="eyebrow" style={{ marginTop: 2 }}>Steering Committee · Q1/Q2</div>
           </div>
-        </a>
-
-        <nav style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          {navLinks.map(function (l) {
-            var active = l.id === "variants";
-            return (
-              <a key={l.id} href={l.href} style={{
-                padding: "6px 12px",
-                fontFamily: "var(--font)", fontWeight: active ? 600 : 500, fontSize: 13,
-                color: active ? "var(--ink)" : "var(--ink-mute)",
-                background: active ? "var(--surface-2)" : "transparent",
-                border: active ? "1px solid var(--border)" : "1px solid transparent",
-                borderRadius: 999, textDecoration: "none",
-                transition: "color 120ms ease",
-              }}>{l.label}</a>
-            );
-          })}
-        </nav>
+        </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <Tag tone="amber">{isSlide ? "Slide " + idx : "Cover"}</Tag>

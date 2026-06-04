@@ -42,7 +42,7 @@ function VarCover({ ctx }) {
           })}
         </div>
         <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 14, color: "var(--ink-mute)", fontSize: 14 }}>
-          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>9 slides + cover</span>
+          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>{VAR_STEPS.length - 1} slides + cover</span>
         </div>
       </div>
     </div>);
@@ -117,89 +117,89 @@ function VarStep1({ ctx }) {
 }
 
 // ======================================================
-// STEP 2 — Strategic Scope (Updated Layout)
+// STEP 2 — Strategic Scope (Two-Column Layout)
 // ======================================================
 function VarStep2({ ctx }) {
-  // Product types with their specific attributes (no duplicates)
-  var productTypeData = [
-    {
-      name: "Packaged Food",
-      selected: true,
-      attributes: ["Size", "Flavor", "Dietary Type", "Packaging Type"]
-    },
-    {
-      name: "Packaged Non-Food",
-      selected: true,
-      attributes: ["Size", "Color", "Scent", "Material", "Pack Count"]
-    },
-    {
-      name: "Fresh Food",
-      selected: false,
-      attributes: ["Size", "Weight", "Temperature"]
-    },
-    {
-      name: "Frozen Food",
-      selected: false,
-      attributes: ["Size", "Flavor", "Weight"]
-    },
-    {
-      name: "Beverages",
-      selected: false,
-      attributes: ["Size", "Flavor", "Strength"]
-    },
-    {
-      name: "Health & Beauty",
-      selected: false,
-      attributes: ["Size", "Flavor", "Scent", "Color", "Strength"]
-    },
-    {
-      name: "Household",
-      selected: false,
-      attributes: ["Size", "Scent", "Color", "Material", "Pack Count"]
-    }
+  // Product Types - separate list
+  var productTypes = [
+    { name: "Packaged Food", sel: true },
+    { name: "Packaged Non-Food", sel: true },
+    { name: "Fresh Food", sel: false },
+    { name: "Frozen Food", sel: false },
+    { name: "Beverages", sel: false },
+    { name: "Health & Beauty", sel: false },
+    { name: "Household", sel: false }
   ];
+
+  // Variant Attributes - separate list (no duplicates)
+  var attributes = [
+    { name: "Size", sel: true },
+    { name: "Flavor", sel: true },
+    { name: "Color", sel: false },
+    { name: "Scent", sel: false },
+    { name: "Pack Count", sel: false },
+    { name: "Material", sel: false },
+    { name: "Weight", sel: false },
+    { name: "Strength", sel: false },
+    { name: "Temperature", sel: false },
+    { name: "Dietary Type", sel: false },
+    { name: "Packaging Type", sel: false }
+  ];
+
+  function renderList(items) {
+    return items.map(function (t, i) {
+      return (
+        <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", background: t.sel ? "var(--ink)" : "var(--surface-2)", border: "1px solid " + (t.sel ? "transparent" : "var(--border)"), borderRadius: 8 }}>
+          {t.sel ?
+          <CheckIcon size={14} /> :
+          <span style={{ width: 14, height: 14, flexShrink: 0, display: "inline-block" }}></span>
+          }
+          <span style={{ fontSize: 13, fontWeight: t.sel ? 700 : 400, color: t.sel ? "#fff" : "var(--ink-mute)", flex: 1 }}>{t.name}</span>
+          {t.sel && <Tag tone="neutral" style={{ background: "rgba(255,255,255,0.18)", color: "#fff", border: "none", fontSize: 10 }}>Q1/Q2</Tag>}
+        </div>);
+    });
+  }
 
   return (
     <StepFrame kicker="Slide 2 · Strategic Scope" eyebrowTone="amber" title="Narrowing the Horizon for Q1/Q2" lede="Balancing a massive catalog footprint against speed-to-market.">
-      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
-          {productTypeData.map(function (pt, i) {
-            return (
-              <Card key={i} padded style={{
-                background: pt.selected ? "var(--ink)" : "var(--surface)",
-                borderColor: pt.selected ? "transparent" : "var(--border)"
-              }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-                  <div style={{ fontWeight: 700, fontSize: 15, color: pt.selected ? "#fff" : "var(--ink)" }}>{pt.name}</div>
-                  {pt.selected && <Tag tone="neutral" style={{ background: "rgba(255,255,255,0.18)", color: "#fff", border: "none", fontSize: 10 }}>Q1/Q2</Tag>}
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {pt.attributes.map(function (attr, j) {
-                    var isSelected = pt.selected && (attr === "Size" || attr === "Flavor");
-                    return (
-                      <span key={j} style={{
-                        padding: "4px 10px",
-                        fontSize: 12,
-                        fontWeight: isSelected ? 700 : 500,
-                        color: pt.selected ? (isSelected ? "#fff" : "rgba(255,255,255,0.7)") : "var(--ink-mute)",
-                        background: pt.selected ? (isSelected ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.1)") : "var(--surface-2)",
-                        borderRadius: 999,
-                        border: pt.selected ? "1px solid rgba(255,255,255,0.2)" : "1px solid var(--border)"
-                      }}>{attr}</span>
-                    );
-                  })}
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-        <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
-          <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Structural Constraints</Eyebrow>
-          <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-            Scope locked to <strong>Packaged Food</strong> and <strong>Packaged Non-Food</strong> with two variant attributes: <strong>Size</strong> and <strong>Flavor</strong>. Attempting an all-inclusive launch across all 7 types before pipeline validation would result in systemic scope creep.
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 180px 1fr", gap: 20 }}>
+        <Card padded>
+          <Eyebrow style={{ marginBottom: 6 }}>Product Types</Eyebrow>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 16 }}>
+            <span style={{ fontWeight: 700, fontSize: 40, color: "var(--ink)", letterSpacing: "-0.03em", lineHeight: 1 }}>7</span>
+            <span style={{ fontSize: 13, color: "var(--ink-mute)" }}>unique types in catalog</span>
           </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>{renderList(productTypes)}</div>
+        </Card>
+
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14 }}>
+          <div style={{ padding: "18px 14px", background: "var(--amber-tint)", border: "1px solid var(--amber-edge)", borderRadius: "var(--radius-lg)", textAlign: "center", width: "100%" }}>
+            <div style={{ fontSize: 22, fontWeight: 800, color: "var(--ink)", letterSpacing: "-0.025em" }}>7 → 2</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", marginTop: 3 }}>PRODUCT TYPES</div>
+            <div style={{ height: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <ArrowDown size={14} color="var(--amber)" />
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: "var(--ink)", letterSpacing: "-0.025em" }}>11 → 2</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", marginTop: 3 }}>ATTRIBUTES</div>
+          </div>
+          <div style={{ fontSize: 12, color: "var(--ink-mute)", textAlign: "center", lineHeight: 1.55 }}>Validate logic under optimal conditions first</div>
+        </div>
+
+        <Card padded>
+          <Eyebrow style={{ marginBottom: 6 }}>Variant Attributes</Eyebrow>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 16 }}>
+            <span style={{ fontWeight: 700, fontSize: 40, color: "var(--ink)", letterSpacing: "-0.03em", lineHeight: 1 }}>11</span>
+            <span style={{ fontSize: 13, color: "var(--ink-mute)" }}>distinct attributes</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>{renderList(attributes)}</div>
         </Card>
       </div>
+      <Card padded style={{ marginTop: 20, background: "var(--amber-tint)" }}>
+        <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Structural Constraints</Eyebrow>
+        <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
+          Scope locked to the two most common and conversion-heavy customer decision dimensions: <strong>Size</strong> and <strong>Flavor</strong>. Attempting an all-inclusive launch across all 7 types and 11 attributes before pipeline validation would result in systemic scope creep.
+        </div>
+      </Card>
     </StepFrame>);
 }
 
