@@ -42,7 +42,7 @@ function VarCover({ ctx }) {
           })}
         </div>
         <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 14, color: "var(--ink-mute)", fontSize: 14 }}>
-          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>{VAR_STEPS.length - 1} slides + cover</span>
+          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>9 slides + cover</span>
         </div>
       </div>
     </div>);
