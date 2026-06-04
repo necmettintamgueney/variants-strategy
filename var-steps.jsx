@@ -53,7 +53,7 @@ function VarCover({ ctx }) {
 // ======================================================
 function VarStep1({ ctx }) {
   var platforms = [
-  { name: "HungerStation", region: "MENA", gmv: "€7.8M", detail: "Combined PB1 + PB2 tracks", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
+  { name: "HungerStation", region: "MENA", gmv: "€7.8M", detail: "Packaged Food & Beverages, Packaged Non-Food", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
   { name: "PedidosYa", region: "LATAM", gmv: "€3.56M", detail: "87,765 products · 33 L3 master categories", accent: "var(--blue)", tint: "var(--blue-tint)", edge: "var(--blue-edge)" },
   { name: "Pandora", region: "APAC", gmv: "€840k", detail: "Packaged Food · Singapore & Malaysia blueprint", accent: "var(--purple)", tint: "var(--purple-tint)", edge: "#D9C2E8" }];
 
@@ -195,9 +195,9 @@ function VarStep2({ ctx }) {
         </Card>
       </div>
       <Card padded style={{ marginTop: 20, background: "var(--amber-tint)" }}>
-        <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Structural Constraints</Eyebrow>
+        <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Why This Scope?</Eyebrow>
         <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-          Scope locked to <strong>Packaged Food and Beverages</strong> and <strong>Packaged Non Food</strong> with two variant attributes: <strong>Size</strong> and <strong>Flavor</strong>. Attempting an all-inclusive launch across all 7 types before pipeline validation would result in systemic scope creep.
+          These two product types cover the majority of strategic targets from <strong>HungerStation</strong>, <strong>Foodpanda APAC</strong>, and <strong>PedidosYa</strong>. Focusing on them enabled us to go live ASAP and deliver value quickly. That's why we kept the early development and evaluation phase simple — speed to market over complexity.
         </div>
       </Card>
     </StepFrame>);
@@ -210,9 +210,9 @@ function VarStep3({ ctx }) {
   // Visual flow steps with icons
   var flowSteps = [
     {
-      title: "Raw Products",
-      subtitle: "Entire Catalog",
-      example: "100,000+ SKUs",
+      title: "Products",
+      subtitle: "To Be Grouped",
+      example: "Filtered catalog",
       icon: "📦"
     },
     {
@@ -360,7 +360,7 @@ function VarStep3({ ctx }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <CheckIcon size={20} />
           <div style={{ fontSize: 15, color: "var(--ink)" }}>
-            <strong>Zero manual work</strong> — the entire pipeline runs automatically, from raw catalog to customer-facing variant picker
+            <strong>Zero manual work</strong> — the entire pipeline runs automatically, from products to be grouped to customer-facing variant picker
           </div>
         </div>
       </Card>
@@ -378,9 +378,9 @@ function VarStep4({ ctx }) {
   { pct: 4, label: "Pure Errors", desc: "Structurally incorrect matches — not viable for any grouping.", color: "var(--ink-faint)", bg: "var(--surface-2)", edge: "var(--border)" }];
 
   return (
-    <StepFrame kicker="Slide 4 · Internal Evaluation" eyebrowTone="amber"
-    title={<>Uncovering the Subjective <span style={{ color: "var(--amber)" }}>Gray Area</span></>}
-    lede="What a 5,000-product deep dive revealed about our data flaws and structural gaps.">
+    <StepFrame kicker="Slide 4 · Internal Evaluation" eyebrowTone="green"
+    title="Validation Results & Performance Baseline"
+    lede="5,000-product deep dive to validate the grouping logic and establish accuracy benchmarks.">
       <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 28 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 22, flexWrap: "wrap" }}>
@@ -446,7 +446,7 @@ function VarStep4({ ctx }) {
 function VarStep5({ ctx }) {
   var platforms = [
   {
-    name: "Talabat", region: "MENA", stance: "Precision + Audit",
+    name: "HungerStation", region: "MENA", stance: "Precision + Audit",
     color: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Executed line-by-line validation audits. Flagged formatting issues and confirmed the ~8% missing attribute bottleneck, corrected inside the sprint.",
@@ -536,77 +536,89 @@ function VarStep6({ ctx }) {
 
   return (
     <StepFrame kicker="Slide 6 · Engineering Under Fire" eyebrowTone="red" title="Unblocking Group Creation" lede="Solving the missing attribute bottleneck with a targeted AI solution.">
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <Card padded style={{ background: "var(--red-tint)", borderColor: "var(--red-edge)" }}>
-            <Eyebrow tone="red" style={{ marginBottom: 10 }}>The Blocking Issue</Eyebrow>
-            <div style={{ fontSize: 15, lineHeight: 1.6, color: "var(--ink)" }}>
-              Variant group creation was <strong>blocked</strong> because products were missing variant attribute values. The PIM requires all items in a group to have complete attribute data — a single missing value stops the entire group from being created.
+      {/* Visual: Before vs After */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }}>
+        <Card padded style={{ background: "var(--red-tint)", borderColor: "var(--red-edge)", textAlign: "center" }}>
+          <Eyebrow tone="red" style={{ marginBottom: 12 }}>Before</Eyebrow>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A (Size: 100g)</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Size</Tag>
             </div>
-          </Card>
-          <Card padded>
-            <Eyebrow style={{ marginBottom: 14 }}>Two Paths Forward</Eyebrow>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {options.map(function (opt, i) {
-                return (
-                  <div key={i} style={{
-                    padding: "14px 16px",
-                    background: opt.chosen ? "var(--green-tint)" : "var(--surface-2)",
-                    border: "1px solid " + (opt.chosen ? "var(--green-edge)" : "var(--border)"),
-                    borderRadius: "var(--radius)",
-                    position: "relative"
-                  }}>
-                    {opt.chosen && (
-                      <div style={{ position: "absolute", top: -8, right: 12 }}>
-                        <Tag tone="green">CHOSEN</Tag>
-                      </div>
-                    )}
-                    <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)", marginBottom: 8 }}>{opt.label}</div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                      {opt.pros.map(function (p, j) {
-                        return (
-                          <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 12.5, color: "var(--ink-soft)", lineHeight: 1.4 }}>
-                            <CheckIcon size={12} />
-                            <span>{p}</span>
-                          </div>
-                        );
-                      })}
-                      {opt.cons.map(function (c, j) {
-                        return (
-                          <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 12.5, color: "var(--ink-mute)", lineHeight: 1.4 }}>
-                            <XIcon size={12} />
-                            <span>{c}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B (Flavor: BBQ)</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor</Tag>
             </div>
-          </Card>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <Card padded accent="var(--green-2)" style={{ background: "var(--green-tint)", borderColor: "var(--green-edge)" }}>
-            <Eyebrow tone="green" style={{ marginBottom: 10 }}>The Sprint Breakthrough</Eyebrow>
-            <div style={{ fontWeight: 700, fontSize: 22, color: "var(--ink)", letterSpacing: "-0.01em", marginBottom: 12 }}>All in One Sprint</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {sprintWork.map(function (item, i) {
-                return (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                    <CheckIcon size={16} />
-                    <div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>{item.label}</div>
-                      <div style={{ fontSize: 12.5, color: "var(--ink-soft)", lineHeight: 1.4 }}>{item.desc}</div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
+              <Tag tone="red" style={{ fontSize: 10 }}>✗ Missing</Tag>
             </div>
-            <div style={{ marginTop: 16, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <Tag tone="green">90%+ Coverage</Tag>
-              <Tag tone="green">90%+ Accuracy</Tag>
-              <Tag tone="green">1 Sprint</Tag>
+          </div>
+          <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--dh-red)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
+            🚫 Group Creation Blocked
+          </div>
+        </Card>
+
+        <Card padded style={{ background: "var(--green-tint)", borderColor: "var(--green-edge)", textAlign: "center" }}>
+          <Eyebrow tone="green" style={{ marginBottom: 12 }}>After</Eyebrow>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A (Size: 100g)</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Size</Tag>
+            </div>
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B (Flavor: BBQ)</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor</Tag>
+            </div>
+            <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 20 }}>📦</span>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Filled</Tag>
+            </div>
+          </div>
+          <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--green-2)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
+            ✓ Group Created Successfully
+          </div>
+        </Card>
+      </div>
+
+      {/* Two Options and Sprint Work */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <Card padded>
+          <Eyebrow style={{ marginBottom: 14 }}>Why This Mattered</Eyebrow>
+          <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6, marginBottom: 12 }}>
+            <strong>8% of potential variant groups</strong> were blocked due to missing attributes. Without a solution, thousands of products couldn't be grouped.
+          </div>
+          <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5 }}>
+            The PIM requires all items in a group to have complete attribute data — a single missing value blocks the entire group creation.
+          </div>
+        </Card>
+        <Card padded style={{ background: "var(--green-tint)", borderColor: "var(--green-edge)" }}>
+          <Eyebrow tone="green" style={{ marginBottom: 10 }}>All in One Sprint</Eyebrow>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {sprintWork.map(function (item, i) {
+              return (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+                  <CheckIcon size={14} />
+                  <div style={{ fontSize: 13, color: "var(--ink)" }}><strong>{item.label}</strong> — {item.desc}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Tag tone="green">90%+ Coverage</Tag>
+            <Tag tone="green">90%+ Accuracy</Tag>
+            <Tag tone="green">1 Sprint</Tag>
+          </div>
+        </Card>
+      </div>
+    </StepFrame>);
+}
             </div>
           </Card>
           <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
@@ -675,25 +687,20 @@ function VarStep7({ ctx }) {
 }
 
 // ======================================================
-// STEP 8 — Roadmap (NEW - NOW/NEXT/LATER)
+// STEP 8 — Roadmap
 // ======================================================
 function VarStep8({ ctx }) {
   var nowItems = [
-    { title: "Product Type Scaling", desc: "Expanding automated matching to new product types and attributes, starting with General Merchandise, Electronics, Smoking Tobacco, Pharma, and Ultra Fresh (mostly unbranded) to unlock Health & Beauty next, followed by the entire assortment." },
-    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." },
-    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
+    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
+    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." }
   ];
 
   var nextItems = [
-    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
-    { title: "Targeted Scaling Framework", desc: "Deploying and testing this generic \"Preference\" attribute on a smaller dataset first to calculate conversion lift before scaling across other platforms and product types." },
-    { title: "Infrastructure Modernization", desc: "Partnering with central database and platform teams to dismantle backend structural limits, unlocking complex, multi-dimensional variations." }
+    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." }
   ];
 
   var laterItems = [
-    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." },
-    { title: "Granular Quality Controls", desc: "Closely tracking automated matching health across different granularities, executing immediate, localized logic adjustments if low performance happens." },
-    { title: "Automated Quality Auditing", desc: "Deploying our fully integrated, automated quality evaluation setup internally to completely eliminate manual platform validation loops." }
+    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
   ];
 
   var volumetricItems = [
@@ -702,13 +709,13 @@ function VarStep8({ ctx }) {
   ];
 
   return (
-    <StepFrame kicker="Slide 8 · Roadmap" eyebrowTone="blue" title="Strategic Execution Timeline" lede="Phased approach balancing immediate wins with long-term transformation.">
+    <StepFrame kicker="Slide 8 · Roadmap" eyebrowTone="blue" title="What's Next" lede="Phased approach balancing immediate wins with long-term transformation.">
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
         {/* NOW */}
         <Card padded style={{ borderTop: "4px solid var(--green-2)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="green">NOW</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>In Progress & Active</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>In Progress</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {nowItems.map(function (item, i) {
@@ -726,7 +733,7 @@ function VarStep8({ ctx }) {
         <Card padded style={{ borderTop: "4px solid var(--blue)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="blue">NEXT</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Near-Term Execution</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Near-Term</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {nextItems.map(function (item, i) {
@@ -744,7 +751,7 @@ function VarStep8({ ctx }) {
         <Card padded style={{ borderTop: "4px solid var(--purple)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="neutral" style={{ background: "var(--purple-tint)", color: "var(--purple)", border: "1px solid var(--purple)" }}>LATER</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Strategic Horizon</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Strategic</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {laterItems.map(function (item, i) {
@@ -772,13 +779,9 @@ function VarStep8({ ctx }) {
             );
           })}
         </div>
-        <div style={{ marginTop: 12, fontSize: 12, color: "var(--ink-mute)", fontStyle: "italic" }}>
-          Focus shifted entirely to systemic optimization based on the data validated in the Now/Next phases.
-        </div>
       </Card>
     </StepFrame>);
 }
-
 // ======================================================
 // STEP 9 — Long-Term Vision
 // ======================================================
@@ -831,12 +834,6 @@ function VarStep9({ ctx }) {
               </div>
               <div style={{ marginTop: 12, fontSize: 12.5, color: "var(--ink-mute)", fontStyle: "italic" }}>Currently completely blocked under the static rules model.</div>
             </Card>
-          </div>
-        </div>
-        <div style={{ padding: "24px 28px", background: "var(--ink)", borderRadius: "var(--radius-xl)" }}>
-          <Eyebrow style={{ color: "rgba(255,255,255,0.4)", marginBottom: 10 }}>Executive Summary</Eyebrow>
-          <div style={{ fontSize: 18, fontWeight: 500, color: "#fff", lineHeight: 1.65, maxWidth: 900 }}>
-            We are investing low, using current capabilities to prove the value offline first, and building automated quality workarounds to bypass central team deployment bottlenecks. We will only initiate major architectural changes once we have clear evidence that this direction directly optimizes user conversion and makes the business more money.
           </div>
         </div>
       </div>
