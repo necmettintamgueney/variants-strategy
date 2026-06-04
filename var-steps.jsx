@@ -547,7 +547,7 @@ function VarStep5({ ctx }) {
 function VarStep6({ ctx }) {
   var platforms = [
   {
-    name: "Talabat", region: "MENA", stance: "Precision + Audit",
+    name: "HungerStation", region: "MENA", stance: "Precision + Audit",
     color: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Executed line-by-line validation audits. Flagged formatting issues and confirmed the ~8% missing attribute bottleneck, corrected inside the sprint.",
