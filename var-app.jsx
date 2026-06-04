@@ -33,8 +33,8 @@ function VarHeader({ idx, totalSteps, step }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <DHLogo size={28} />
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-            <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>Product Variants Strategy</div>
-            <div className="eyebrow" style={{ marginTop: 2 }}>Steering Committee · Q1/Q2</div>
+            <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>Product Variants</div>
+            <div className="eyebrow" style={{ marginTop: 2 }}>Steer Co</div>
           </div>
         </div>
 

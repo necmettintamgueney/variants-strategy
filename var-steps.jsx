@@ -18,16 +18,16 @@ function VarCover({ ctx }) {
           <DHLogo size={36} />
           <div>
             <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)", lineHeight: 1 }}>Delivery Hero</div>
-            <div className="eyebrow" style={{ marginTop: 4 }}>Q-Commerce · Catalog Intelligence</div>
+            <div className="eyebrow" style={{ marginTop: 4 }}>Q-Commerce · Dynamic Content</div>
           </div>
         </div>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 14px", background: "var(--amber-tint)", border: "1px solid var(--amber-edge)", borderRadius: 999, marginBottom: 22 }}>
           <Dot tone="amber" size={7} pulse />
-          <span style={{ fontSize: 12, color: "var(--amber)", fontWeight: 600 }}>Steering Committee · Q1/Q2 Review</span>
+          <span style={{ fontSize: 12, color: "var(--amber)", fontWeight: 600 }}>Steer Co</span>
         </div>
         <h1 style={{ margin: 0, fontFamily: "var(--font)", fontWeight: 800, fontSize: "clamp(48px, 7vw, 80px)", lineHeight: 1.02, letterSpacing: "-0.035em", color: "var(--ink)", textWrap: "balance" }}>
-          Product Variants<br />
-          <span style={{ color: "var(--dh-red)" }}>Strategy</span>
+          Product<br />
+          <span style={{ color: "var(--dh-red)" }}>Variants</span>
         </h1>
         <p style={{ marginTop: 20, fontSize: 20, lineHeight: 1.45, color: "var(--ink-soft)", maxWidth: 660, fontWeight: 400, textWrap: "pretty" }}>
           Commercial anchor to long-term vision — a complete account of the Q1/Q2 variants initiative across Talabat, PedidosYa, and Pandora.
@@ -53,7 +53,7 @@ function VarCover({ ctx }) {
 // ======================================================
 function VarStep1({ ctx }) {
   var platforms = [
-  { name: "Talabat", region: "MENA", gmv: "€7.8M", detail: "Combined PB1 + PB2 tracks", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
+  { name: "HungerStation", region: "MENA", gmv: "€7.8M", detail: "Combined PB1 + PB2 tracks", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
   { name: "PedidosYa", region: "LATAM", gmv: "€3.56M", detail: "87,765 products · 33 L3 master categories", accent: "var(--blue)", tint: "var(--blue-tint)", edge: "var(--blue-edge)" },
   { name: "Pandora", region: "APAC", gmv: "€840k", detail: "Packaged Food · Singapore & Malaysia blueprint", accent: "var(--purple)", tint: "var(--purple-tint)", edge: "#D9C2E8" }];
 
