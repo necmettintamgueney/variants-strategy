@@ -32,18 +32,18 @@ function VarHeader({ idx, totalSteps, step }) {
       WebkitBackdropFilter: "blur(8px)",
       borderBottom: "1px solid var(--border)",
     }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "14px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <DHLogo size={28} />
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <DHLogo size={24} />
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-            <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>Product Variants</div>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "var(--ink)" }}>Product Variants</div>
             <div className="eyebrow" style={{ marginTop: 2 }}>Steer Co</div>
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <Tag tone="amber">{isSlide ? "Slide " + idx : "Cover"}</Tag>
-          <div style={{ fontSize: 12.5, color: "var(--ink-mute)", fontFamily: "var(--mono)" }}>
+          <div style={{ fontSize: 12, color: "var(--ink-mute)", fontFamily: "var(--mono)" }}>
             <span style={{ color: "var(--ink)", fontWeight: 600 }}>{idx + 1}</span> / {totalSteps}
           </div>
         </div>
@@ -60,8 +60,8 @@ function VarNavBar({ idx, total, onPrev, onNext, onGoto }) {
   var isLast  = idx === total - 1;
   return (
     <div className="no-print" style={{
-      position: "sticky", bottom: 0, zIndex: 15, marginTop: 40,
-      padding: "16px 0 24px",
+      position: "sticky", bottom: 0, zIndex: 15, marginTop: 24,
+      padding: "12px 0 16px",
       background: "linear-gradient(0deg, var(--bg) 70%, color-mix(in oklab, var(--bg) 0%, transparent))",
       display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16,
     }}>
@@ -73,7 +73,7 @@ function VarNavBar({ idx, total, onPrev, onNext, onGoto }) {
           return (
             <button key={i} onClick={function () { onGoto(i); }} title={s.title}
               style={{
-                width: isCur ? 24 : 8, height: 8, padding: 0,
+                width: isCur ? 20 : 6, height: 6, padding: 0,
                 background: isCur ? "var(--dh-red)" : "var(--border-strong)",
                 border: "none", borderRadius: 999, cursor: "pointer",
                 transition: "all 180ms ease",
@@ -91,8 +91,8 @@ function VarNavBar({ idx, total, onPrev, onNext, onGoto }) {
 
 function varBtn(primary, disabled) {
   return {
-    padding: "10px 18px",
-    fontFamily: "var(--font)", fontWeight: 600, fontSize: 14,
+    padding: "8px 14px",
+    fontFamily: "var(--font)", fontWeight: 600, fontSize: 13,
     background: primary ? (disabled ? "var(--ink-mute)" : "var(--ink)") : "var(--surface)",
     color: primary ? "#fff" : "var(--ink)",
     border: "1px solid " + (primary ? (disabled ? "var(--ink-mute)" : "var(--ink)") : "var(--border)"),
@@ -162,9 +162,9 @@ function VarApp() {
   return (
     <div>
       <VarHeader idx={idx} totalSteps={VAR_STEPS.length} step={step} />
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "28px 32px 0" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "16px 24px 0" }}>
         <main>
-          <div key={idx} data-screen-label={step.title} className="fade-up" style={{ minHeight: "60vh" }}>
+          <div key={idx} data-screen-label={step.title} className="fade-up" style={{ minHeight: "55vh" }}>
             {stepEl}
           </div>
           <VarNavBar idx={idx} total={VAR_STEPS.length} onPrev={prev} onNext={next} onGoto={goTo} />

@@ -78,7 +78,7 @@ function Card({ children, padded = true, style = {}, accent, hover = false, clas
       background: "var(--surface)",
       border: "1px solid var(--border)",
       borderRadius: "var(--radius-lg)",
-      padding: padded ? 22 : 0,
+      padding: padded ? 16 : 0,
       boxShadow: "var(--shadow-1)",
       transition: hover ? "border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease" : undefined,
       ...accentBorderTop,
@@ -110,15 +110,15 @@ function Eyebrow({ children, tone, style = {} }) {
 
 // ---------- StepFrame ----------
 
-function StepFrame({ kicker, eyebrowTone, title, lede, children, padding = "0", maxWidth = 1180 }) {
+function StepFrame({ kicker, eyebrowTone, title, lede, children, padding = "0", maxWidth = 1100 }) {
   return (
     <div style={{ maxWidth, margin: "0 auto", padding }}>
-      {kicker && <Eyebrow tone={eyebrowTone} style={{ marginBottom: 12 }}>{kicker}</Eyebrow>}
+      {kicker && <Eyebrow tone={eyebrowTone} style={{ marginBottom: 8 }}>{kicker}</Eyebrow>}
       {title &&
       <h1 style={{
         margin: 0,
         fontFamily: "var(--font)", fontWeight: 700,
-        fontSize: 48, lineHeight: 1.08,
+        fontSize: 38, lineHeight: 1.1,
         letterSpacing: "-0.025em",
         color: "var(--ink)",
         textWrap: "balance",
@@ -127,15 +127,15 @@ function StepFrame({ kicker, eyebrowTone, title, lede, children, padding = "0", 
       }
       {lede &&
       <p style={{
-        margin: "16px 0 0",
-        fontSize: 18, lineHeight: 1.5,
+        margin: "12px 0 0",
+        fontSize: 16, lineHeight: 1.45,
         color: "var(--ink-soft)",
         maxWidth: 760,
         fontWeight: 400,
         textWrap: "pretty"
       }}>{lede}</p>
       }
-      {children && <div style={{ marginTop: title || lede ? 36 : 0 }}>{children}</div>}
+      {children && <div style={{ marginTop: title || lede ? 24 : 0 }}>{children}</div>}
     </div>);
 }
 
