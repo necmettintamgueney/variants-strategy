@@ -53,7 +53,7 @@ function VarCover({ ctx }) {
 // ======================================================
 function VarStep1({ ctx }) {
   var platforms = [
-  { name: "HungerStation", region: "MENA", gmv: "€7.8M", detail: "Packaged Food & Beverages, Packaged Non-Food", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
+  { name: "Talabat", region: "MENA", gmv: "€7.8M", detail: "Packaged Food & Beverages, Packaged Non-Food", accent: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)" },
   { name: "PedidosYa", region: "LATAM", gmv: "€3.56M", detail: "87,765 products · 33 L3 master categories", accent: "var(--blue)", tint: "var(--blue-tint)", edge: "var(--blue-edge)" },
   { name: "Pandora", region: "APAC", gmv: "€840k", detail: "Packaged Food · Singapore & Malaysia blueprint", accent: "var(--purple)", tint: "var(--purple-tint)", edge: "#D9C2E8" }];
 
@@ -197,7 +197,7 @@ function VarStep2({ ctx }) {
       <Card padded style={{ marginTop: 20, background: "var(--amber-tint)" }}>
         <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Why This Scope?</Eyebrow>
         <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-          These two product types cover the majority of strategic targets from <strong>HungerStation</strong>, <strong>Foodpanda APAC</strong>, and <strong>PedidosYa</strong>. Focusing on them enabled us to go live ASAP and deliver value quickly. That's why we kept the early development and evaluation phase simple — speed to market over complexity.
+          These two product types cover the majority of strategic targets from <strong>Talabat</strong>, <strong>Foodpanda APAC</strong>, and <strong>PedidosYa</strong>. Focusing on them enabled us to go live ASAP and deliver value quickly. That's why we kept the early development and evaluation phase simple — speed to market over complexity.
         </div>
       </Card>
     </StepFrame>);
@@ -446,29 +446,29 @@ function VarStep4({ ctx }) {
 function VarStep5({ ctx }) {
   var platforms = [
   {
-    name: "HungerStation", region: "MENA", stance: "Precision + Audit",
+    name: "Talabat", region: "MENA", stance: "Precision + Audit",
     color: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Executed line-by-line validation audits. Flagged formatting issues and confirmed the ~8% missing attribute bottleneck, corrected inside the sprint.",
-    bullets: ["Line-by-line validation audit", "Flagged formatting issues", "Confirmed 8% attribute gap", "Corrections made in-sprint"]
+    bullets: ["<strong>Line-by-line validation audit</strong>", "<strong>Flagged formatting issues</strong>", "<strong>Confirmed 8% attribute gap</strong>", "<strong>Corrections made in-sprint</strong>"]
   },
   {
     name: "Pandora", region: "APAC", stance: "Precision Focus",
     color: "var(--purple)", tint: "var(--purple-tint)", edge: "#D9C2E8",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Strict, risk-averse structure. Any variation based on main ingredients or non-flavor attributes was a hard stop.",
-    bullets: ["Hard stop on non-flavor attrs", "Zero tolerance for ingredient-based grouping", "High bar, tightly scoped", "Requires clean attribute data"]
+    bullets: ["<strong>Hard stop on non-flavor attrs</strong>", "<strong>Zero tolerance for ingredient-based grouping</strong>", "<strong>High bar, tightly scoped</strong>", "<strong>Requires clean attribute data</strong>"]
   },
   {
     name: "PedidosYa", region: "LATAM", stance: "Scale Focus · Operational Drag",
     color: "var(--amber)", tint: "var(--amber-tint)", edge: "var(--amber-edge)",
     outcome: "Delayed", outcomeTone: "amber",
-    desc: "Wanted fast enablement and high error tolerance, but failed to allocate review capacity and introduced late, unaligned scope requirements.",
-    bullets: ["Speed over precision stance", "No review capacity allocated", "Late multi-attr stack demand", "Flavor + Sweetener Type stacked"]
+    desc: "Wanted fast enablement and high error tolerance, but did not allocate review capacity and introduced late, unaligned scope requirements.",
+    bullets: ["<strong>Speed over precision stance</strong>", "<strong>No review capacity allocated</strong>", "<strong>Late multi-attr stack demand</strong>", "<strong>Flavor + Sweetener Type stacked</strong>"]
   }];
 
   return (
-    <StepFrame kicker="Slide 5 · Platform Disalignment" eyebrowTone="red" title="The Primary Timeline Drain" lede="No two platforms shared a common understanding or operational tolerance for what a 'variant' should be.">
+    <StepFrame kicker="Slide 5 · Platform Disalignment" eyebrowTone="red" title="Platform Alignment Challenges" lede="Different platforms had different understandings and operational tolerances for what a 'variant' should be.">
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {platforms.map(function (p, i) {
@@ -501,7 +501,7 @@ function VarStep5({ ctx }) {
             <Tag tone="amber">PedidosYa</Tag>
           </div>
           <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-            Despite wanting rapid speed, PedidosYa <strong>failed to allocate operational review capacity</strong>. Instead, they introduced a late, unaligned scope requirement — demanding a custom multi-attribute stack combining <em>Flavor</em> with <em>Sweetener Type</em> (Diet / Zero / Sugar), which effectively <strong>stalled their own go-live path</strong>.
+            PedidosYa wanted rapid speed but did not allocate operational review capacity. They introduced a late, unaligned scope requirement — demanding a custom multi-attribute stack combining <em>Flavor</em> with <em>Sweetener Type</em> (Diet / Zero / Sugar), which delayed their go-live path.
           </div>
         </Card>
       </div>
@@ -554,7 +554,7 @@ function VarStep6({ ctx }) {
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
               <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
-              <Tag tone="red" style={{ fontSize: 10 }}>✗ Missing</Tag>
+              <Tag tone="red" style={{ fontSize: 10 }}>✗ Missing Size & Flavor</Tag>
             </div>
           </div>
           <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--dh-red)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
@@ -577,8 +577,8 @@ function VarStep6({ ctx }) {
             </div>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ Filled</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C (Size: 100g, Flavor: BBQ)</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ AI Filled</Tag>
             </div>
           </div>
           <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--green-2)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
@@ -679,16 +679,21 @@ function VarStep7({ ctx }) {
 // ======================================================
 function VarStep8({ ctx }) {
   var nowItems = [
-    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
-    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." }
+    { title: "Product Type Scaling", desc: "Expanding automated matching to new product types and attributes, starting with General Merchandise, Electronics, Smoking Tobacco, Pharma, and Ultra Fresh (mostly unbranded) to unlock Health & Beauty next, followed by the entire assortment." },
+    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." },
+    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
   ];
 
   var nextItems = [
-    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." }
+    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
+    { title: "Targeted Scaling Framework", desc: "Deploying and testing this generic \"Preference\" attribute on a smaller dataset first to calculate conversion lift before scaling across other platforms and product types." },
+    { title: "Infrastructure Modernization", desc: "Partnering with central database and platform teams to dismantle backend structural limits, unlocking complex, multi-dimensional variations." }
   ];
 
   var laterItems = [
-    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
+    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." },
+    { title: "Granular Quality Controls", desc: "Closely tracking automated matching health across different granularities, executing immediate, localized logic adjustments if low performance happens." },
+    { title: "Automated Quality Auditing", desc: "Deploying our fully integrated, automated quality evaluation setup internally to completely eliminate manual platform validation loops." }
   ];
 
   var volumetricItems = [
@@ -703,7 +708,7 @@ function VarStep8({ ctx }) {
         <Card padded style={{ borderTop: "4px solid var(--green-2)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="green">NOW</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>In Progress</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>In Progress & Active</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {nowItems.map(function (item, i) {
@@ -721,7 +726,7 @@ function VarStep8({ ctx }) {
         <Card padded style={{ borderTop: "4px solid var(--blue)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="blue">NEXT</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Near-Term</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Near-Term Execution</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {nextItems.map(function (item, i) {
@@ -739,7 +744,7 @@ function VarStep8({ ctx }) {
         <Card padded style={{ borderTop: "4px solid var(--purple)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Tag tone="neutral" style={{ background: "var(--purple-tint)", color: "var(--purple)", border: "1px solid var(--purple)" }}>LATER</Tag>
-            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Strategic</span>
+            <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Strategic Horizon</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {laterItems.map(function (item, i) {
@@ -768,8 +773,12 @@ function VarStep8({ ctx }) {
           })}
         </div>
       </Card>
+      <div style={{ marginTop: 12, fontSize: 12, color: "var(--ink-mute)", fontStyle: "italic" }}>
+        Focus shifted entirely to systemic optimization based on the data validated in the Now/Next phases.
+      </div>
     </StepFrame>);
 }
+
 // ======================================================
 // STEP 9 — Long-Term Vision
 // ======================================================
