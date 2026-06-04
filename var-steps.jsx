@@ -207,61 +207,163 @@ function VarStep2({ ctx }) {
 // STEP 3 — The Variant Grouping Mechanism (NEW)
 // ======================================================
 function VarStep3({ ctx }) {
-  var steps = [
+  // Visual flow steps with icons
+  var flowSteps = [
     {
-      num: "1",
-      title: "Core Structural Filtering",
-      desc: "The logic processes the catalog using three strict, mandatory foundational guardrails. To be evaluated for a group, items must share the exact same Brand, Product Type, and L3 Master Category."
+      title: "Raw Products",
+      subtitle: "Entire Catalog",
+      example: "100,000+ SKUs",
+      icon: "📦"
     },
     {
-      num: "2",
-      title: "Information Enrichment",
-      desc: "The system leverages our established, proprietary attribute extraction tool (developed in-house in previous years) to isolate and identify potential variant attribute values (such as flavor or size) from available product images and titles."
+      title: "Filter",
+      subtitle: "Brand + Type + Category",
+      example: "Same brand, same type",
+      icon: "🔍"
     },
     {
-      num: "3",
-      title: "Cluster Scanning",
-      desc: "The mechanism systematically scans this pre-filtered, enriched dataset to detect logical relationships and map out matching product variants."
+      title: "Enrich",
+      subtitle: "Extract Attributes",
+      example: "Size: 500ml, Flavor: Chocolate",
+      icon: "🤖"
     },
     {
-      num: "4",
-      title: "Automated Package Generation",
-      desc: "Once a variant cluster is detected, the logic automatically assigns a standardized variant group name, a unique variant group ID, and pairs them with their respective attributes."
+      title: "Group",
+      subtitle: "Match Variants",
+      example: "4 products → 1 group",
+      icon: "🔗"
     },
     {
-      num: "5",
-      title: "Direct System Readiness",
-      desc: "The final output file is automatically compiled into a clean format that is fully compliant and ready to go live on our central database (PIM) without requiring manual re-formatting."
+      title: "Live",
+      subtitle: "PIM Ready",
+      example: "Customer sees variants",
+      icon: "✅"
     }
   ];
 
+  // Example products for visual
+  var exampleProducts = [
+    { name: "Coca-Cola 330ml", size: "330ml", flavor: "Original" },
+    { name: "Coca-Cola 500ml", size: "500ml", flavor: "Original" },
+    { name: "Coca-Cola 330ml Zero", size: "330ml", flavor: "Zero" },
+    { name: "Coca-Cola 500ml Zero", size: "500ml", flavor: "Zero" }
+  ];
+
   return (
-    <StepFrame kicker="Slide 3 · The Variant Grouping Mechanism" eyebrowTone="blue" title="How It Works" lede="The multi-layered filtering and automated packaging workflow.">
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {steps.map(function (step, i) {
+    <StepFrame kicker="Slide 3 · The Variant Grouping Mechanism" eyebrowTone="blue" title="How It Works" lede="From raw catalog to live variant groups in 5 automated steps.">
+      {/* Visual Flow */}
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        padding: "24px 20px",
+        background: "var(--surface-2)",
+        borderRadius: "var(--radius-xl)",
+        marginBottom: 24,
+        overflowX: "auto"
+      }}>
+        {flowSteps.map(function (step, i) {
           return (
-            <Card key={i} padded style={{ display: "grid", gridTemplateColumns: "60px 1fr", gap: 20, alignItems: "flex-start" }}>
+            <React.Fragment key={i}>
               <div style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                background: "var(--blue-tint)",
-                border: "2px solid var(--blue-edge)",
                 display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 700,
-                fontSize: 24,
-                color: "var(--blue)"
-              }}>{step.num}</div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 18, color: "var(--ink)", marginBottom: 8 }}>{step.title}</div>
-                <div style={{ fontSize: 15, color: "var(--ink-soft)", lineHeight: 1.6 }}>{step.desc}</div>
+                textAlign: "center",
+                minWidth: 100
+              }}>
+                <div style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: "50%",
+                  background: "var(--surface)",
+                  border: "2px solid var(--blue-edge)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 24,
+                  marginBottom: 8
+                }}>{step.icon}</div>
+                <div style={{ fontWeight: 700, fontSize: 13, color: "var(--ink)" }}>{step.title}</div>
+                <div style={{ fontSize: 11, color: "var(--ink-mute)", marginTop: 2 }}>{step.subtitle}</div>
               </div>
-            </Card>
+              {i < flowSteps.length - 1 && (
+                <ArrowRight size={20} color="var(--blue)" />
+              )}
+            </React.Fragment>
           );
         })}
       </div>
+
+      {/* Concrete Example */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <Card padded style={{ background: "var(--blue-tint)", borderColor: "var(--blue-edge)" }}>
+          <Eyebrow tone="blue" style={{ marginBottom: 12 }}>Concrete Example</Eyebrow>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)", marginBottom: 12 }}>
+            4 separate SKUs become 1 variant group
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {exampleProducts.map(function (p, i) {
+              return (
+                <div key={i} style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "8px 12px",
+                  background: "var(--surface)",
+                  borderRadius: "var(--radius)",
+                  fontSize: 12
+                }}>
+                  <span style={{ flex: 1, fontWeight: 500, color: "var(--ink)" }}>{p.name}</span>
+                  <Tag tone="neutral" style={{ fontSize: 10 }}>{p.size}</Tag>
+                  <Tag tone="neutral" style={{ fontSize: 10 }}>{p.flavor}</Tag>
+                </div>
+              );
+            })}
+          </div>
+        </Card>
+
+        <Card padded>
+          <Eyebrow style={{ marginBottom: 12 }}>What the Customer Sees</Eyebrow>
+          <div style={{
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-lg)",
+            overflow: "hidden",
+            background: "var(--surface)"
+          }}>
+            <div style={{
+              padding: "12px 16px",
+              borderBottom: "1px solid var(--border)",
+              fontWeight: 600,
+              fontSize: 14,
+              color: "var(--ink)"
+            }}>Coca-Cola</div>
+            <div style={{ padding: 16 }}>
+              <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8 }}>Select Size:</div>
+              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>330ml</span>
+                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>500ml</span>
+              </div>
+              <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8 }}>Select Flavor:</div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>Original</span>
+                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>Zero</span>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Key Benefit */}
+      <Card padded style={{ marginTop: 20, background: "var(--green-tint)", borderColor: "var(--green-edge)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <CheckIcon size={20} />
+          <div style={{ fontSize: 15, color: "var(--ink)" }}>
+            <strong>Zero manual work</strong> — the entire pipeline runs automatically, from raw catalog to customer-facing variant picker
+          </div>
+        </div>
+      </Card>
     </StepFrame>);
 }
 
