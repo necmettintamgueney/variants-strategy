@@ -241,12 +241,12 @@ function VarStep3({ ctx }) {
     }
   ];
 
-  // Example products for visual
+  // Example products for visual - Lay's chips
   var exampleProducts = [
-    { name: "Coca-Cola 330ml", size: "330ml", flavor: "Original" },
-    { name: "Coca-Cola 500ml", size: "500ml", flavor: "Original" },
-    { name: "Coca-Cola 330ml Zero", size: "330ml", flavor: "Zero" },
-    { name: "Coca-Cola 500ml Zero", size: "500ml", flavor: "Zero" }
+    { name: "Lay's Classic 40g", size: "40g", flavor: "Classic" },
+    { name: "Lay's Classic 100g", size: "100g", flavor: "Classic" },
+    { name: "Lay's BBQ 40g", size: "40g", flavor: "BBQ" },
+    { name: "Lay's BBQ 100g", size: "100g", flavor: "BBQ" }
   ];
 
   return (
@@ -338,17 +338,17 @@ function VarStep3({ ctx }) {
               fontWeight: 600,
               fontSize: 14,
               color: "var(--ink)"
-            }}>Coca-Cola</div>
+            }}>Lay's Potato Chips</div>
             <div style={{ padding: 16 }}>
               <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8 }}>Select Size:</div>
               <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>330ml</span>
-                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>500ml</span>
+                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>40g</span>
+                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>100g</span>
               </div>
               <div style={{ fontSize: 12, color: "var(--ink-mute)", marginBottom: 8 }}>Select Flavor:</div>
-              <div style={{ display: "flex", gap: 8 }}>
-                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>Original</span>
-                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>Zero</span>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <span style={{ padding: "6px 12px", background: "var(--ink)", color: "#fff", borderRadius: 999, fontSize: 12 }}>Classic</span>
+                <span style={{ padding: "6px 12px", background: "var(--surface-2)", borderRadius: 999, fontSize: 12 }}>BBQ</span>
               </div>
             </div>
           </div>
