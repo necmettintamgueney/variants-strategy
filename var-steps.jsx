@@ -122,28 +122,28 @@ function VarStep1({ ctx }) {
 function VarStep2({ ctx }) {
   // Product Types - separate list
   var productTypes = [
-    { name: "Packaged Food", sel: true },
-    { name: "Packaged Non-Food", sel: true },
-    { name: "Fresh Food", sel: false },
-    { name: "Frozen Food", sel: false },
-    { name: "Beverages", sel: false },
-    { name: "Health & Beauty", sel: false },
-    { name: "Household", sel: false }
+    { name: "Ultra Fresh / Loose Food & Beverages", sel: false },
+    { name: "Packaged Food and Beverages", sel: true },
+    { name: "Packaged Non Food", sel: true },
+    { name: "Smoking / Tobacco", sel: false },
+    { name: "Pharma", sel: false },
+    { name: "Electronics", sel: false },
+    { name: "General Merchandise", sel: false }
   ];
 
   // Variant Attributes - separate list (no duplicates)
   var attributes = [
-    { name: "Size", sel: true },
+    { name: "Item Size (S, M, L)", sel: true },
     { name: "Flavor", sel: true },
+    { name: "Country of Origin", sel: false },
+    { name: "Net Size", sel: false },
     { name: "Color", sel: false },
+    { name: "Fat Type/Percent", sel: false },
+    { name: "Strength (Dosage)", sel: false },
     { name: "Scent", sel: false },
-    { name: "Pack Count", sel: false },
-    { name: "Material", sel: false },
-    { name: "Weight", sel: false },
-    { name: "Strength", sel: false },
-    { name: "Temperature", sel: false },
-    { name: "Dietary Type", sel: false },
-    { name: "Packaging Type", sel: false }
+    { name: "Age Group", sel: false },
+    { name: "Storage (Memory)", sel: false },
+    { name: "Lens Power", sel: false }
   ];
 
   function renderList(items) {
@@ -197,7 +197,7 @@ function VarStep2({ ctx }) {
       <Card padded style={{ marginTop: 20, background: "var(--amber-tint)" }}>
         <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Structural Constraints</Eyebrow>
         <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-          Scope locked to the two most common and conversion-heavy customer decision dimensions: <strong>Size</strong> and <strong>Flavor</strong>. Attempting an all-inclusive launch across all 7 types and 11 attributes before pipeline validation would result in systemic scope creep.
+          Scope locked to <strong>Packaged Food and Beverages</strong> and <strong>Packaged Non Food</strong> with two variant attributes: <strong>Size</strong> and <strong>Flavor</strong>. Attempting an all-inclusive launch across all 7 types before pipeline validation would result in systemic scope creep.
         </div>
       </Card>
     </StepFrame>);
@@ -410,78 +410,107 @@ function VarStep5({ ctx }) {
 // STEP 6 — Engineering Under Fire
 // ======================================================
 function VarStep6({ ctx }) {
-  var pipeline = [
-  { label: "Vendor Catalog", sub: "raw product data", blocked: false },
-  { label: "Variant Grouping Engine", sub: "AI matching", blocked: false },
-  { label: "PIM Ingestion", sub: "all attributes required", blocked: true },
-  { label: "Live Variant Groups", sub: "platform catalog", blocked: false }];
+  var options = [
+    {
+      label: "Option A: Fine-Tune Existing Model",
+      pros: ["Leverages existing infrastructure", "No new systems to maintain"],
+      cons: ["Time-consuming retraining cycle", "Requires pipeline changes", "Uncertain timeline", "Would delay go-live significantly"],
+      chosen: false
+    },
+    {
+      label: "Option B: New AI Agent (Chosen)",
+      pros: ["Single purpose: find missing attribute values", "No pipeline changes required", "Can be developed and tested quickly", "Easily replaceable if better models emerge"],
+      cons: ["Adds a new component to maintain"],
+      chosen: true
+    }
+  ];
 
-  var whyNot = [
-  "Slow, structurally inefficient, and financially prohibitive.",
-  "Requires manually tagging dozens of product features for every single image and title.",
-  "Root-level fix doesn't fit any sprint — we needed to ship."];
+  var sprintWork = [
+    { label: "AI Agent Development", desc: "Built and tested multiple models, evaluated accuracy vs cost offline" },
+    { label: "90%+ Coverage & Accuracy", desc: "Validated performance threshold before deployment" },
+    { label: "False-Friend Ingestion", desc: "Implemented filtering to remove gray area from output" },
+    { label: "Format Fixes", desc: "Resolved structural formatting issues for PIM compatibility" }
+  ];
 
   return (
-    <StepFrame kicker="Slide 6 · Engineering Under Fire" eyebrowTone="red" title="Bypassing Systemic Pipeline Flaws" lede="Deploying a temporary automated assistant to unblock the core data engineering queue.">
+    <StepFrame kicker="Slide 6 · Engineering Under Fire" eyebrowTone="red" title="Unblocking Group Creation" lede="Solving the missing attribute bottleneck with a targeted AI solution.">
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card padded style={{ background: "var(--red-tint)", borderColor: "var(--red-edge)" }}>
-            <Eyebrow tone="red" style={{ marginBottom: 10 }}>The Ingestion Absolute Law</Eyebrow>
-            <div style={{ fontSize: 15, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.6, borderLeft: "3px solid var(--dh-red)", paddingLeft: 14 }}>
-              "Every single item inside a variant group must possess all variant attributes. A single missing value drops and blocks the entire group creation."
+            <Eyebrow tone="red" style={{ marginBottom: 10 }}>The Blocking Issue</Eyebrow>
+            <div style={{ fontSize: 15, lineHeight: 1.6, color: "var(--ink)" }}>
+              Variant group creation was <strong>blocked</strong> because products were missing variant attribute values. The PIM requires all items in a group to have complete attribute data — a single missing value stops the entire group from being created.
             </div>
           </Card>
           <Card padded>
-            <Eyebrow style={{ marginBottom: 14 }}>The Blocked Pipeline</Eyebrow>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {pipeline.map(function (s, i) {
+            <Eyebrow style={{ marginBottom: 14 }}>Two Paths Forward</Eyebrow>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {options.map(function (opt, i) {
                 return (
-                  <React.Fragment key={i}>
-                    <div style={{ padding: "12px 16px", background: s.blocked ? "var(--red-tint)" : "var(--surface-2)", border: "1px solid " + (s.blocked ? "var(--red-edge)" : "var(--border)"), borderRadius: "var(--radius)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 600, color: s.blocked ? "var(--dh-red)" : "var(--ink)" }}>{s.label}</div>
-                        <div style={{ fontSize: 11.5, color: "var(--ink-mute)", marginTop: 2 }}>{s.sub}</div>
+                  <div key={i} style={{
+                    padding: "14px 16px",
+                    background: opt.chosen ? "var(--green-tint)" : "var(--surface-2)",
+                    border: "1px solid " + (opt.chosen ? "var(--green-edge)" : "var(--border)"),
+                    borderRadius: "var(--radius)",
+                    position: "relative"
+                  }}>
+                    {opt.chosen && (
+                      <div style={{ position: "absolute", top: -8, right: 12 }}>
+                        <Tag tone="green">CHOSEN</Tag>
                       </div>
-                      {s.blocked && <Tag tone="red">BOTTLENECK</Tag>}
+                    )}
+                    <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink)", marginBottom: 8 }}>{opt.label}</div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                      {opt.pros.map(function (p, j) {
+                        return (
+                          <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 12.5, color: "var(--ink-soft)", lineHeight: 1.4 }}>
+                            <CheckIcon size={12} />
+                            <span>{p}</span>
+                          </div>
+                        );
+                      })}
+                      {opt.cons.map(function (c, j) {
+                        return (
+                          <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 12.5, color: "var(--ink-mute)", lineHeight: 1.4 }}>
+                            <XIcon size={12} />
+                            <span>{c}</span>
+                          </div>
+                        );
+                      })}
                     </div>
-                    {i < pipeline.length - 1 &&
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                        <ArrowDown size={14} color={i === 1 ? "var(--dh-red)" : "var(--ink-faint)"} />
-                      </div>
-                    }
-                  </React.Fragment>);
+                  </div>
+                );
               })}
             </div>
-          </Card>
-          <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
-            <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Coverage Gap</Eyebrow>
-            <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6 }}>The main, existing automated data engine scored high on <strong>accuracy</strong>, but its <em>coverage</em> for single features like flavor was too low to fulfil the PIM's absolute matrix requirements.</div>
           </Card>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card padded accent="var(--green-2)" style={{ background: "var(--green-tint)", borderColor: "var(--green-edge)" }}>
             <Eyebrow tone="green" style={{ marginBottom: 10 }}>The Sprint Breakthrough</Eyebrow>
-            <div style={{ fontWeight: 700, fontSize: 22, color: "var(--ink)", letterSpacing: "-0.01em", marginBottom: 12 }}>Automated AI Data Assistant</div>
-            <div style={{ fontSize: 15, color: "var(--ink-soft)", lineHeight: 1.6 }}>
-              A standalone AI assistant engineered in a <strong>single sprint</strong> that dynamically fills in missing attributes during the final grouping phase — entirely unblocking the pipeline without touching the root engine.
+            <div style={{ fontWeight: 700, fontSize: 22, color: "var(--ink)", letterSpacing: "-0.01em", marginBottom: 12 }}>All in One Sprint</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {sprintWork.map(function (item, i) {
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                    <CheckIcon size={16} />
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>{item.label}</div>
+                      <div style={{ fontSize: 12.5, color: "var(--ink-soft)", lineHeight: 1.4 }}>{item.desc}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div style={{ marginTop: 16, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <Tag tone="green">Shipped in 1 sprint</Tag>
-              <Tag tone="green">Unblocks PIM</Tag>
-              <Tag tone="green">No root change</Tag>
+              <Tag tone="green">90%+ Coverage</Tag>
+              <Tag tone="green">90%+ Accuracy</Tag>
+              <Tag tone="green">1 Sprint</Tag>
             </div>
           </Card>
-          <Card padded>
-            <Eyebrow style={{ marginBottom: 14 }}>Why Not Fix at the Root?</Eyebrow>
-            {whyNot.map(function (point, i) {
-              return (
-                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 10 }}>
-                  <XIcon size={16} />
-                  <div style={{ fontSize: 14, color: "var(--ink-soft)", lineHeight: 1.5 }}>{point}</div>
-                </div>);
-            })}
-            <div style={{ marginTop: 6, padding: 12, background: "var(--surface-2)", borderRadius: "var(--radius)", border: "1px solid var(--border)", fontSize: 13, color: "var(--ink-mute)", fontStyle: "italic", lineHeight: 1.5 }}>
-              We pivoted away from the "setup trap" and found a lightweight, targeted bypass instead.
+          <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
+            <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Model Evaluation Approach</Eyebrow>
+            <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6 }}>
+              We tested <strong>multiple models</strong> and evaluated accuracy vs cost <em>without going live</em>. This offline benchmarking ensured we hit the 90%+ threshold for both coverage and accuracy before committing to deployment.
             </div>
           </Card>
         </div>
