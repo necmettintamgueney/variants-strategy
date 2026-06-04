@@ -8,11 +8,14 @@ const VAR_STEPS = [
   { kind: "step2", title: "Slide 2 · Strategic Scope" },
   { kind: "step3", title: "Slide 3 · Variant Grouping Mechanism" },
   { kind: "step4", title: "Slide 4 · Internal Evaluation" },
-  { kind: "step5", title: "Slide 5 · Platform Disalignment" },
-  { kind: "step6", title: "Slide 6 · Engineering Under Fire" },
-  { kind: "step7", title: "Slide 7 · Mass Scaling" },
-  { kind: "step8", title: "Slide 8 · Roadmap" },
-  { kind: "step9", title: "Slide 9 · Long-Term Vision" },
+  { kind: "step5", title: "Slide 5 · Gray Area Cases" },
+  { kind: "step6", title: "Slide 6 · Platform Disalignment" },
+  { kind: "step7", title: "Slide 7 · Platform Validation Metrics" },
+  { kind: "step8", title: "Slide 8 · Engineering Under Fire" },
+  { kind: "step9", title: "Slide 9 · Mass Scaling" },
+  { kind: "step10", title: "Slide 10 · Roadmap" },
+  { kind: "step11", title: "Slide 11 · What's In Progress" },
+  { kind: "step12", title: "Slide 12 · Long-Term Vision" },
 ];
 
 // ─────────────────────────────────────────
@@ -149,6 +152,9 @@ function VarApp() {
       case "step7": return React.createElement(VarStep7, { ctx: ctx });
       case "step8": return React.createElement(VarStep8, { ctx: ctx });
       case "step9": return React.createElement(VarStep9, { ctx: ctx });
+      case "step10": return React.createElement(VarStep10, { ctx: ctx });
+      case "step11": return React.createElement(VarStep11, { ctx: ctx });
+      case "step12": return React.createElement(VarStep12, { ctx: ctx });
       default:      return null;
     }
   }());

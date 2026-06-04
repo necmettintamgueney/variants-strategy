@@ -6,7 +6,7 @@ const { useState: useVS, useEffect: useVE } = React;
 // ======================================================
 function VarCover({ ctx }) {
   var stats = [
-  { v: "9", l: "narrative slides" },
+  { v: "12", l: "narrative slides" },
   { v: "3", l: "platforms" },
   { v: "750K", l: "products processed" },
   { v: "~€12.2M", l: "combined GMV opportunity" }];
@@ -42,7 +42,7 @@ function VarCover({ ctx }) {
           })}
         </div>
         <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 14, color: "var(--ink-mute)", fontSize: 14 }}>
-          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>9 slides + cover</span>
+          Use <Kbd>→</Kbd> <Kbd>←</Kbd> to navigate · <span style={{ fontFamily: "var(--mono)", fontSize: 12 }}>12 slides + cover</span>
         </div>
       </div>
     </div>);
@@ -441,34 +441,138 @@ function VarStep4({ ctx }) {
 }
 
 // ======================================================
-// STEP 5 — Platform Disalignment
+// STEP 5 — Gray Area Cases
 // ======================================================
 function VarStep5({ ctx }) {
+  // Examples of gray area - protein type vs flavor confusion
+  var grayAreaExamples = [
+    { product: "Instant Noodles", attribute: "Protein Type", values: ["Beef", "Chicken", "Pork", "Shrimp"], confusion: "Model thinks these are flavor variants, but they're actually protein types" },
+    { product: "Instant Soup", attribute: "Protein Type", values: ["Chicken", "Mushroom", "Seafood"], confusion: "Main ingredient differences, not flavor variations" },
+    { product: "Protein Bars", attribute: "Protein Source", values: ["Whey", "Plant-Based", "Casein"], confusion: "Different protein sources, not flavors" },
+    { product: "Yogurt", attribute: "Fat Content", values: ["Full Fat", "Low Fat", "Fat-Free"], confusion: "Nutritional variation, not a flavor difference" },
+    { product: "Coffee", attribute: "Roast Level", values: ["Light", "Medium", "Dark"], confusion: "Roast profile, not a flavor variant" }
+  ];
+
+  return (
+    <StepFrame kicker="Slide 5 · Gray Area Cases" eyebrowTone="amber" title="The Gray Area Challenge" lede="Between internal evaluation and platform disagreement, visualizing the cases that fall outside fixed definitions.">
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {/* Visual Example */}
+        <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
+          <Eyebrow tone="amber" style={{ marginBottom: 14 }}>Example: Instant Noodles</Eyebrow>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--dh-red)", marginBottom: 8, textTransform: "uppercase" }}>❌ Model Thinks: Flavor Variants</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {["Beef", "Chicken", "Pork", "Shrimp"].map(function (v, i) {
+                  return (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: "var(--red-tint)", borderRadius: "var(--radius)", border: "1px solid var(--red-edge)" }}>
+                      <span style={{ fontSize: 18 }}>🍜</span>
+                      <span style={{ fontSize: 13, color: "var(--ink)" }}>Instant Noodles - {v}</span>
+                      <Tag tone="red" style={{ fontSize: 10, marginLeft: "auto" }}>Flavor: {v}</Tag>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--green-2)", marginBottom: 8, textTransform: "uppercase" }}>✓ Actually: Protein Type Variants</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {["Beef", "Chicken", "Pork", "Shrimp"].map(function (v, i) {
+                  return (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: "var(--green-tint)", borderRadius: "var(--radius)", border: "1px solid var(--green-edge)" }}>
+                      <span style={{ fontSize: 18 }}>🍜</span>
+                      <span style={{ fontSize: 13, color: "var(--ink)" }}>Instant Noodles - {v}</span>
+                      <Tag tone="green" style={{ fontSize: 10, marginLeft: "auto" }}>Protein: {v}</Tag>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* False Friend Explanation */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          <Card padded>
+            <Eyebrow style={{ marginBottom: 10 }}>What is a "False Friend"?</Eyebrow>
+            <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6, marginBottom: 12 }}>
+              In linguistics, a <strong>false friend</strong> is a word that looks or sounds similar to another word but has a different meaning.
+            </div>
+            <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5, padding: "12px", background: "var(--surface-2)", borderRadius: "var(--radius)" }}>
+              <strong style={{ color: "var(--ink)" }}>Example:</strong> The English word "Actual" looks like the Spanish "Actual" — but in Spanish it means "current," not "real."
+            </div>
+          </Card>
+          <Card padded style={{ background: "var(--blue-tint)", borderColor: "var(--blue-edge)" }}>
+            <Eyebrow tone="blue" style={{ marginBottom: 10 }}>Applied to Variants</Eyebrow>
+            <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6, marginBottom: 12 }}>
+              We trained an AI matrix to recognize <strong>false friend attributes</strong> — attributes that look like flavor but aren't.
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {["Protein Type", "Main Ingredient", "Fat Content", "Roast Level", "Texture"].map(function (t, i) {
+                return <Tag key={i} tone="neutral" style={{ fontSize: 11 }}>{t}</Tag>;
+              })}
+            </div>
+            <div style={{ marginTop: 12, fontSize: 12, color: "var(--ink-soft)" }}>
+              These are now filtered out before grouping, ensuring only true flavor variants are matched.
+            </div>
+          </Card>
+        </div>
+
+        {/* More Examples Table */}
+        <Card padded>
+          <Eyebrow style={{ marginBottom: 12 }}>More Gray Area Examples</Eyebrow>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, fontSize: 11 }}>
+            {grayAreaExamples.map(function (ex, i) {
+              return (
+                <div key={i} style={{ padding: "10px", background: "var(--surface-2)", borderRadius: "var(--radius)", border: "1px solid var(--border)" }}>
+                  <div style={{ fontWeight: 600, color: "var(--ink)", marginBottom: 6 }}>{ex.product}</div>
+                  <div style={{ color: "var(--ink-mute)", marginBottom: 4 }}>{ex.attribute}</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+                    {ex.values.slice(0, 3).map(function (v, j) {
+                      return <Tag key={j} tone="neutral" style={{ fontSize: 9 }}>{v}</Tag>;
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Card>
+      </div>
+    </StepFrame>);
+}
+
+// ======================================================
+// STEP 6 — Platform Disalignment
+// ======================================================
+function VarStep6({ ctx }) {
   var platforms = [
   {
     name: "Talabat", region: "MENA", stance: "Precision + Audit",
     color: "var(--dh-red)", tint: "var(--red-tint)", edge: "var(--red-edge)",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Executed line-by-line validation audits. Flagged formatting issues and confirmed the ~8% missing attribute bottleneck, corrected inside the sprint.",
-    bullets: ["<strong>Line-by-line validation audit</strong>", "<strong>Flagged formatting issues</strong>", "<strong>Confirmed 8% attribute gap</strong>", "<strong>Corrections made in-sprint</strong>"]
+    bullets: ["Line-by-line validation audit", "Flagged formatting issues", "Confirmed 8% attribute gap", "Corrections made in-sprint"],
+    boldAll: true
   },
   {
     name: "Pandora", region: "APAC", stance: "Precision Focus",
     color: "var(--purple)", tint: "var(--purple-tint)", edge: "#D9C2E8",
     outcome: "Aligned", outcomeTone: "green",
     desc: "Strict, risk-averse structure. Any variation based on main ingredients or non-flavor attributes was a hard stop.",
-    bullets: ["<strong>Hard stop on non-flavor attrs</strong>", "<strong>Zero tolerance for ingredient-based grouping</strong>", "<strong>High bar, tightly scoped</strong>", "<strong>Requires clean attribute data</strong>"]
+    bullets: ["Hard stop on non-flavor attrs", "Zero tolerance for ingredient-based grouping", "High bar, tightly scoped", "Requires clean attribute data"],
+    boldAll: true
   },
   {
     name: "PedidosYa", region: "LATAM", stance: "Scale Focus · Operational Drag",
     color: "var(--amber)", tint: "var(--amber-tint)", edge: "var(--amber-edge)",
     outcome: "Delayed", outcomeTone: "amber",
     desc: "Wanted fast enablement and high error tolerance, but did not allocate review capacity and introduced late, unaligned scope requirements.",
-    bullets: ["<strong>Speed over precision stance</strong>", "<strong>No review capacity allocated</strong>", "<strong>Late multi-attr stack demand</strong>", "<strong>Flavor + Sweetener Type stacked</strong>"]
+    bullets: ["Speed over precision stance", "No review capacity allocated", "Late multi-attr stack demand", "Flavor + Sweetener Type stacked"],
+    boldAll: true
   }];
 
   return (
-    <StepFrame kicker="Slide 5 · Platform Disalignment" eyebrowTone="red" title="Platform Alignment Challenges" lede="Different platforms had different understandings and operational tolerances for what a 'variant' should be.">
+    <StepFrame kicker="Slide 6 · Platform Disalignment" eyebrowTone="red" title="Platform Alignment Challenges" lede="Different platforms had different understandings and operational tolerances for what a 'variant' should be.">
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {platforms.map(function (p, i) {
@@ -488,7 +592,7 @@ function VarStep5({ ctx }) {
                     return (
                       <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 12.5, color: "var(--ink-soft)", lineHeight: 1.4 }}>
                         <span style={{ width: 4, height: 4, borderRadius: "50%", background: p.color, flexShrink: 0, marginTop: 6 }}></span>
-                        {b}
+                        <span style={{ fontWeight: p.boldAll ? 700 : 400 }}>{b}</span>
                       </div>);
                   })}
                 </div>
@@ -509,9 +613,97 @@ function VarStep5({ ctx }) {
 }
 
 // ======================================================
-// STEP 6 — Engineering Under Fire
+// STEP 7 — Platform Validation Metrics
 // ======================================================
-function VarStep6({ ctx }) {
+function VarStep7({ ctx }) {
+  var metrics = [
+    {
+      platform: "HungerStation",
+      region: "MENA",
+      metric: "Validation Success Rate",
+      before: "33%",
+      after: "90%",
+      improvement: "+57pp",
+      color: "var(--dh-red)",
+      tint: "var(--red-tint)",
+      edge: "var(--red-edge)",
+      note: "First validation had low success due to formatting issues. After fixes, dramatic improvement."
+    },
+    {
+      platform: "Foodpanda APAC",
+      region: "APAC",
+      metric: "Grouping Accuracy",
+      before: "99%",
+      after: "90%",
+      improvement: "Adjusted",
+      color: "var(--purple)",
+      tint: "var(--purple-tint)",
+      edge: "#D9C2E8",
+      note: "High initial grouping accuracy, but missing attributes and format issues were not reported. After fixes, 90% grouping success."
+    },
+    {
+      platform: "PedidosYa",
+      region: "LATAM",
+      metric: "Grouping Success",
+      before: "—",
+      after: "85%",
+      improvement: "Pending",
+      color: "var(--amber)",
+      tint: "var(--amber-tint)",
+      edge: "var(--amber-edge)",
+      note: "Delayed due to late multi-attribute requirements. Currently at 85% grouping success."
+    }
+  ];
+
+  return (
+    <StepFrame kicker="Slide 7 · Platform Validation Metrics" eyebrowTone="green" title="After Platform Validations" lede="Observed metrics after platform validation and quick fixes.">
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {metrics.map(function (m, i) {
+            return (
+              <Card key={i} padded style={{ background: m.tint, borderColor: m.edge }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 17, color: "var(--ink)" }}>{m.platform}</div>
+                    <Tag tone="neutral" style={{ marginTop: 5 }}>{m.region}</Tag>
+                  </div>
+                  <Tag tone={m.improvement === "Pending" ? "amber" : "green"}>{m.improvement}</Tag>
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: m.color, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>{m.metric}</div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, padding: "16px 0" }}>
+                  {m.before !== "—" && (
+                    <>
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontWeight: 700, fontSize: 32, color: "var(--ink-mute)", lineHeight: 1 }}>{m.before}</div>
+                        <div style={{ fontSize: 10, color: "var(--ink-mute)", marginTop: 4 }}>Before</div>
+                      </div>
+                      <ArrowRight size={20} color="var(--green-2)" />
+                    </>
+                  )}
+                  <div style={{ textAlign: "center" }}>
+                    <div style={{ fontWeight: 700, fontSize: 40, color: "var(--green-2)", lineHeight: 1 }}>{m.after}</div>
+                    <div style={{ fontSize: 10, color: "var(--ink-mute)", marginTop: 4 }}>After</div>
+                  </div>
+                </div>
+                <div style={{ fontSize: 12, color: "var(--ink-soft)", lineHeight: 1.5, marginTop: 12 }}>{m.note}</div>
+              </Card>
+            );
+          })}
+        </div>
+        <Card padded style={{ background: "var(--green-tint)", borderColor: "var(--green-edge)" }}>
+          <Eyebrow tone="green" style={{ marginBottom: 8 }}>Key Takeaway</Eyebrow>
+          <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
+            Platform validations revealed critical formatting and attribute issues that were <strong>not visible</strong> in internal evaluations. Quick fixes led to significant improvements across all platforms.
+          </div>
+        </Card>
+      </div>
+    </StepFrame>);
+}
+
+// ======================================================
+// STEP 8 — Engineering Under Fire
+// ======================================================
+function VarStep8({ ctx }) {
   var options = [
     {
       label: "Option A: Fine-Tune Existing Model",
@@ -535,7 +727,7 @@ function VarStep6({ ctx }) {
   ];
 
   return (
-    <StepFrame kicker="Slide 6 · Engineering Under Fire" eyebrowTone="red" title="Unblocking Group Creation" lede="Solving the missing attribute bottleneck with a targeted AI solution.">
+    <StepFrame kicker="Slide 8 · Engineering Under Fire" eyebrowTone="red" title="Unblocking Group Creation" lede="Solving the missing attribute bottleneck with a targeted AI solution.">
       {/* Visual: Before vs After */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }}>
         <Card padded style={{ background: "var(--red-tint)", borderColor: "var(--red-edge)", textAlign: "center" }}>
@@ -543,18 +735,18 @@ function VarStep6({ ctx }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A (Size: 100g)</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ Size</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor: Classic</Tag>
             </div>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B (Flavor: BBQ)</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor: BBQ</Tag>
             </div>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
               <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
-              <Tag tone="red" style={{ fontSize: 10 }}>✗ Missing Size & Flavor</Tag>
+              <Tag tone="red" style={{ fontSize: 10 }}>✗ Missing Flavor</Tag>
             </div>
           </div>
           <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--dh-red)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
@@ -567,18 +759,18 @@ function VarStep6({ ctx }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A (Size: 100g)</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ Size</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product A</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor: Classic</Tag>
             </div>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B (Flavor: BBQ)</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product B</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor: BBQ</Tag>
             </div>
             <div style={{ padding: "12px 16px", background: "var(--surface)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ fontSize: 20 }}>📦</span>
-              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C (Size: 100g, Flavor: BBQ)</span>
-              <Tag tone="green" style={{ fontSize: 10 }}>✓ AI Filled</Tag>
+              <span style={{ fontSize: 13, color: "var(--ink)" }}>Product C</span>
+              <Tag tone="green" style={{ fontSize: 10 }}>✓ Flavor: Paprika (AI)</Tag>
             </div>
           </div>
           <div style={{ marginTop: 12, padding: "10px 16px", background: "var(--green-2)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 600, fontSize: 13 }}>
@@ -621,13 +813,13 @@ function VarStep6({ ctx }) {
 }
 
 // ======================================================
-// STEP 7 — Mass Scaling
+// STEP 9 — Mass Scaling
 // ======================================================
-function VarStep7({ ctx }) {
+function VarStep9({ ctx }) {
   var before = ["Platform teams review every group before go-live", "Feedback cycles take 2–3 weeks per batch", "Local team availability gates the entire rollout", "Timeline slippage compounds across platforms"];
   var after = ["Automated variant groups pushed live to production directly", "Local content teams flag errors retroactively", "No pre-moderation gate — faster time to revenue", "Errors corrected in context, not in isolation"];
   return (
-    <StepFrame kicker="Slide 7 · Mass Scaling" eyebrowTone="green" title="Breaking the Review Bottleneck" lede="Expanding to 750,000 products while transitioning to a post-moderation framework.">
+    <StepFrame kicker="Slide 9 · Mass Scaling" eyebrowTone="green" title="Breaking the Review Bottleneck" lede="Expanding to 750,000 products while transitioning to a post-moderation framework.">
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div style={{ padding: "28px 24px", background: "var(--ink)", borderRadius: "var(--radius-xl)", textAlign: "center" }}>
           <div style={{ fontWeight: 800, fontSize: 72, color: "#fff", letterSpacing: "-0.04em", lineHeight: 1 }}>750,000</div>
@@ -675,25 +867,24 @@ function VarStep7({ ctx }) {
 }
 
 // ======================================================
-// STEP 8 — Roadmap
+// STEP 10 — Roadmap
 // ======================================================
-function VarStep8({ ctx }) {
+function VarStep10({ ctx }) {
   var nowItems = [
     { title: "Product Type Scaling", desc: "Expanding automated matching to new product types and attributes, starting with General Merchandise, Electronics, Smoking Tobacco, Pharma, and Ultra Fresh (mostly unbranded) to unlock Health & Beauty next, followed by the entire assortment." },
-    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." },
-    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
+    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
+    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." }
   ];
 
   var nextItems = [
-    { title: "Assortment-Wide Grouping", desc: "Enabling continuous matching against the entire live inventory. The system will automatically scan all available products to build new combinations or execute \"regrouping.\"" },
+    { title: "Capturing the \"Gray Area\"", desc: "Introducing a universal, flexible variation attribute (e.g., \"Preference\") applicable across all product types to systematically capture the 45% missed opportunity uncovered in our initial validation baseline." },
     { title: "Targeted Scaling Framework", desc: "Deploying and testing this generic \"Preference\" attribute on a smaller dataset first to calculate conversion lift before scaling across other platforms and product types." },
-    { title: "Infrastructure Modernization", desc: "Partnering with central database and platform teams to dismantle backend structural limits, unlocking complex, multi-dimensional variations." }
+    { title: "Granular Quality Controls", desc: "Closely tracking automated matching health across different granularities, executing immediate, localized logic adjustments if low performance happens." }
   ];
 
   var laterItems = [
-    { title: "Live Ingestion (Regrouping)", desc: "Allowing the system to dynamically inject newly added items directly into existing live groups inside the central database without breaking current configurations." },
-    { title: "Granular Quality Controls", desc: "Closely tracking automated matching health across different granularities, executing immediate, localized logic adjustments if low performance happens." },
-    { title: "Automated Quality Auditing", desc: "Deploying our fully integrated, automated quality evaluation setup internally to completely eliminate manual platform validation loops." }
+    { title: "Infrastructure Modernization", desc: "Partnering with central database and platform teams to dismantle backend structural limits, unlocking complex, multi-dimensional variations." },
+    { title: "The Dynamic Paradigm Shift", desc: "Transitioning entirely away from rigid rules and moving toward fluid, semantic similarity grouping." }
   ];
 
   var volumetricItems = [
@@ -702,7 +893,7 @@ function VarStep8({ ctx }) {
   ];
 
   return (
-    <StepFrame kicker="Slide 8 · Roadmap" eyebrowTone="blue" title="What's Next" lede="Phased approach balancing immediate wins with long-term transformation.">
+    <StepFrame kicker="Slide 10 · Roadmap" eyebrowTone="blue" title="What's Next" lede="Phased approach balancing immediate wins with long-term transformation.">
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
         {/* NOW */}
         <Card padded style={{ borderTop: "4px solid var(--green-2)" }}>
@@ -780,9 +971,132 @@ function VarStep8({ ctx }) {
 }
 
 // ======================================================
-// STEP 9 — Long-Term Vision
+// STEP 11 — What's In Progress
 // ======================================================
-function VarStep9({ ctx }) {
+function VarStep11({ ctx }) {
+  var productTypes = [
+    { name: "Ultra Fresh / Loose Food & Beverages", status: "Q2" },
+    { name: "Packaged Food and Beverages", status: "Done" },
+    { name: "Packaged Non Food", status: "Done" },
+    { name: "Smoking / Tobacco", status: "Q2" },
+    { name: "Pharma", status: "Q2" },
+    { name: "Electronics", status: "Q2" },
+    { name: "General Merchandise", status: "Q2" }
+  ];
+
+  var attributes = [
+    { name: "Item Size (S, M, L)", status: "Done" },
+    { name: "Flavor", status: "Done" },
+    { name: "Country of Origin", status: "Q2" },
+    { name: "Net Size", status: "Q2" },
+    { name: "Color", status: "Q2" },
+    { name: "Fat Type/Percent", status: "Q2" },
+    { name: "Strength (Dosage)", status: "Q2" },
+    { name: "Scent", status: "Q2" },
+    { name: "Age Group", status: "Q2" },
+    { name: "Storage (Memory)", status: "Q2" },
+    { name: "Lens Power", status: "Q2" }
+  ];
+
+  var platforms = [
+    { name: "PedidosYa", status: "Done", region: "LATAM" },
+    { name: "HungerStation", status: "Done", region: "MENA" },
+    { name: "Foodpanda", status: "Done", region: "APAC" },
+    { name: "eFood", status: "Q2", region: "MENA" },
+    { name: "Talabat", status: "Q2", region: "MENA" },
+    { name: "Glovo", status: "Later", region: "Multi" }
+  ];
+
+  function renderStatus(status) {
+    if (status === "Done") return <Tag tone="green">Done</Tag>;
+    if (status === "Q2") return <Tag tone="amber">Q2</Tag>;
+    return <Tag tone="neutral">Later</Tag>;
+  }
+
+  return (
+    <StepFrame kicker="Slide 11 · What's In Progress" eyebrowTone="blue" title="Expansion Plans" lede="By end of Q2, we'll cover all product types and attributes, then expand to more platforms.">
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+          <Card padded>
+            <Eyebrow style={{ marginBottom: 12 }}>Product Types</Eyebrow>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {productTypes.map(function (pt, i) {
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "6px 10px", background: pt.status === "Done" ? "var(--green-tint)" : "var(--surface-2)", borderRadius: "var(--radius)" }}>
+                    <span style={{ fontSize: 12, fontWeight: pt.status === "Done" ? 600 : 400, color: "var(--ink)" }}>{pt.name}</span>
+                    {renderStatus(pt.status)}
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+          <Card padded>
+            <Eyebrow style={{ marginBottom: 12 }}>Attributes</Eyebrow>
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {attributes.map(function (a, i) {
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px 10px", background: a.status === "Done" ? "var(--green-tint)" : "var(--surface-2)", borderRadius: "var(--radius)" }}>
+                    <span style={{ fontSize: 11, fontWeight: a.status === "Done" ? 600 : 400, color: "var(--ink)" }}>{a.name}</span>
+                    {renderStatus(a.status)}
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+          <Card padded>
+            <Eyebrow style={{ marginBottom: 12 }}>Platforms</Eyebrow>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {platforms.map(function (p, i) {
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 10px", background: p.status === "Done" ? "var(--green-tint)" : "var(--surface-2)", borderRadius: "var(--radius)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 12, fontWeight: p.status === "Done" ? 600 : 400, color: "var(--ink)" }}>{p.name}</span>
+                      <Tag tone="neutral" style={{ fontSize: 9 }}>{p.region}</Tag>
+                    </div>
+                    {renderStatus(p.status)}
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+        </div>
+
+        {/* Call for Support */}
+        <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
+          <Eyebrow tone="amber" style={{ marginBottom: 14 }}>Call for Support</Eyebrow>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 14, color: "var(--ink)", marginBottom: 8 }}>Evaluation Support</div>
+              <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5 }}>
+                New attributes and product types will need another evaluation. Our goal is to keep it simple and focused — calculate accuracy and success of grouping for this expansion, and utilise all manual evaluations to train our AI-as-a-judge mechanism to reduce further manual validation need to a minimum.
+              </div>
+            </div>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 14, color: "var(--ink)", marginBottom: 8 }}>Labelling & Annotations</div>
+              <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5 }}>
+                For the longer run, we'll need regular annotations/labelling to keep model performance high. As we don't have a dedicated labelling team, we need platform collaborations. We're open to any suggestions.
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Talabat Note */}
+        <Card padded style={{ background: "var(--red-tint)", borderColor: "var(--red-edge)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+            <Eyebrow tone="red">Talabat Collaboration</Eyebrow>
+          </div>
+          <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6 }}>
+            Talabat has their own variant grouping tool. We'd like to reach a level where we can replace and centralise variant experience end-to-end. We faced some resistance to collaborate in previous examples — they have solutions we already had or were building. We asked to learn more, but there was minimum tendency to collaborate. As a business decision, we did not take Talabat as a pilot platform, but now we're expanding to all platforms, we need this enablement.
+          </div>
+        </Card>
+      </div>
+    </StepFrame>);
+}
+
+// ======================================================
+// STEP 12 — Long-Term Vision
+// ======================================================
+function VarStep12({ ctx }) {
   var unlocked = ["Coffee bean grind sizes", "Instant food protein types", "Packaging variations", "Main ingredient variations", "Texture and form factors", "Regional flavor variants"];
   var derisking = [
   { label: "Zero Platform Friction", desc: "Evaluated internally on minimum scope using our existing evaluation data — no local content team cycles." },
@@ -790,7 +1104,7 @@ function VarStep9({ ctx }) {
   { label: "Financial Audit", desc: "Large-scale infrastructure cost differences audited before any architectural commitment." }];
 
   return (
-    <StepFrame kicker="Slide 9 · Long-Term Vision" eyebrowTone="blue"
+    <StepFrame kicker="Slide 12 · Long-Term Vision" eyebrowTone="blue"
     title={<>Shifting to Semantic <span style={{ color: "var(--blue)" }}>Entity-Based</span> Guardrails</>}
     lede="Moving from rigid definitions to flexible, dynamic similarities.">
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
