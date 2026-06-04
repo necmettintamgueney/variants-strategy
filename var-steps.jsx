@@ -619,18 +619,6 @@ function VarStep6({ ctx }) {
       </div>
     </StepFrame>);
 }
-            </div>
-          </Card>
-          <Card padded style={{ background: "var(--amber-tint)", borderColor: "var(--amber-edge)" }}>
-            <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Model Evaluation Approach</Eyebrow>
-            <div style={{ fontSize: 14, color: "var(--ink)", lineHeight: 1.6 }}>
-              We tested <strong>multiple models</strong> and evaluated accuracy vs cost <em>without going live</em>. This offline benchmarking ensured we hit the 90%+ threshold for both coverage and accuracy before committing to deployment.
-            </div>
-          </Card>
-        </div>
-      </div>
-    </StepFrame>);
-}
 
 // ======================================================
 // STEP 7 — Mass Scaling
