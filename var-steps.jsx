@@ -999,22 +999,24 @@ function VarStep11({ ctx }) {
   ];
 
   var platforms = [
-    { name: "PedidosYa", status: "Done", region: "LATAM" },
-    { name: "HungerStation", status: "Done", region: "MENA" },
-    { name: "Foodpanda", status: "Done", region: "APAC" },
-    { name: "eFood", status: "Q2", region: "MENA" },
-    { name: "Talabat", status: "Q2", region: "MENA" },
-    { name: "Glovo", status: "Later", region: "Multi" }
+    { name: "PedidosYa", status: "Done" },
+    { name: "HungerStation", status: "Done" },
+    { name: "Foodpanda", status: "Done" },
+    { name: "Talabat", status: "Q3" },
+    { name: "Yemeksepeti", status: "Q3" },
+    { name: "eFood", status: "Q3" },
+    { name: "Foodora HU", status: "Q3" },
+    { name: "Glovo", status: "Later" }
   ];
 
   function renderStatus(status) {
     if (status === "Done") return <Tag tone="green">Done</Tag>;
-    if (status === "Q2") return <Tag tone="amber">Q2</Tag>;
+    if (status === "Q3") return <Tag tone="amber">Q3</Tag>;
     return <Tag tone="neutral">Later</Tag>;
   }
 
   return (
-    <StepFrame kicker="Slide 11 · What's In Progress" eyebrowTone="blue" title="Expansion Plans" lede="By end of Q2, we'll cover all product types and attributes, then expand to more platforms.">
+    <StepFrame kicker="Slide 11 · What's In Progress" eyebrowTone="blue" title="Expansion Plans" lede="By end of Q2, we'll cover all product types and attributes. Platform expansion continues in Q3.">
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
           <Card padded>
@@ -1049,10 +1051,7 @@ function VarStep11({ ctx }) {
               {platforms.map(function (p, i) {
                 return (
                   <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 10px", background: p.status === "Done" ? "var(--green-tint)" : "var(--surface-2)", borderRadius: "var(--radius)" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ fontSize: 12, fontWeight: p.status === "Done" ? 600 : 400, color: "var(--ink)" }}>{p.name}</span>
-                      <Tag tone="neutral" style={{ fontSize: 9 }}>{p.region}</Tag>
-                    </div>
+                    <span style={{ fontSize: 12, fontWeight: p.status === "Done" ? 600 : 400, color: "var(--ink)" }}>{p.name}</span>
                     {renderStatus(p.status)}
                   </div>
                 );
