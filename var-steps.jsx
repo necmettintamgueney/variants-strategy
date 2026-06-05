@@ -133,10 +133,10 @@ function VarStep2({ ctx }) {
 
   // Variant Attributes - separate list (no duplicates)
   var attributes = [
-    { name: "Item Size (S, M, L)", sel: true },
+    { name: "Net Size", sel: true },
     { name: "Flavor", sel: true },
+    { name: "Item Size (S, M, L)", sel: false },
     { name: "Country of Origin", sel: false },
-    { name: "Net Size", sel: false },
     { name: "Color", sel: false },
     { name: "Fat Type/Percent", sel: false },
     { name: "Strength (Dosage)", sel: false },
