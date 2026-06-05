@@ -985,10 +985,10 @@ function VarStep11({ ctx }) {
   ];
 
   var attributes = [
-    { name: "Item Size (S, M, L)", status: "Done" },
+    { name: "Net Size", status: "Done" },
     { name: "Flavor", status: "Done" },
+    { name: "Item Size (S, M, L)", status: "Q2" },
     { name: "Country of Origin", status: "Q2" },
-    { name: "Net Size", status: "Q2" },
     { name: "Color", status: "Q2" },
     { name: "Fat Type/Percent", status: "Q2" },
     { name: "Strength (Dosage)", status: "Q2" },
