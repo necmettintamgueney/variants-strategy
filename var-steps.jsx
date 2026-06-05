@@ -197,7 +197,7 @@ function VarStep2({ ctx }) {
       <Card padded style={{ marginTop: 20, background: "var(--amber-tint)" }}>
         <Eyebrow tone="amber" style={{ marginBottom: 8 }}>Why This Scope?</Eyebrow>
         <div style={{ fontSize: 15, color: "var(--ink)", lineHeight: 1.6 }}>
-          These two product types cover the majority of strategic targets from <strong>Talabat</strong>, <strong>Foodpanda APAC</strong>, and <strong>PedidosYa</strong>. Focusing on them enabled us to go live ASAP and deliver value quickly. That's why we kept the early development and evaluation phase simple — speed to market over complexity.
+          These two product types cover the majority of strategic targets from <strong>HungerStation</strong>, <strong>Foodpanda APAC</strong>, and <strong>PedidosYa</strong>. Focusing on them enabled us to go live ASAP and deliver value quickly. That's why we kept the early development and evaluation phase simple — speed to market over complexity.
         </div>
       </Card>
     </StepFrame>);
